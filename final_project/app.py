@@ -7,7 +7,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import sqlite3
 
 # Connect to an SQLite database (or create it if it doesn't exist)
-conn = sqlite3.connect('example.db')
+conn = sqlite3.connect('fashion_butik.db')
 
 # Create a cursor object to interact with the database
 cursor = conn.cursor()
