@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h2>Login</h2>
+<form action="{{ url_for('login') }}" method="post">
+    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
+    <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+    <button type="submit">Log in</button>
+</form>
+{% endblock %}
