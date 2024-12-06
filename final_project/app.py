@@ -1,13 +1,18 @@
 from flask import Flask, render_template, url_for, request, redirect, session
 from werkzeug.security import check_password_hash, generate_password_hash
-from final_project import app, db
 from final_project import helpers
 from datetime import datetime
-from sqlalchemy import text
-
 import sqlite3
 
+app = Flask(__name__)
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 app.secret_key = 'twothousand'
+def get_db_connection():
+    connection = sqlite3.connect("instance/database.db")
+    connection.row_factory = sqlite3.Row
+    return connection
 
 
 @app.route('/')
@@ -26,7 +31,11 @@ def login():
         password = request.form.get("password")
         if not password:
             return helpers.error("provide password", 400)
-        user = db.session.execute(text('SELECT * FROM users WHERE username = :username'), {'username': username}).fetchone()
+        
+        conn = get_db_connection() 
+        cursor = conn.cursor()
+        user = cursor.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+        conn.close()
         
         if user and check_password_hash(user['hash'], password):
             session['user_id'] = user['id']
@@ -54,21 +63,29 @@ def register():
         print(f"Confirmation: {confirmation}")
         if not confirmation:
             return helpers.error("provide confirmation", 400)
-        yes_user = db.session.execute(text('SELECT * FROM users WHERE username = :username'), {'username': username}).fetchone()
+        
+        if password != confirmation:
+            return helpers.error("password and confirmation dont match", 400)
+        
+        conn = get_db_connection() 
+        cursor = conn.cursor()
+        yes_user = cursor.execute('SELECT * FROM users WHERE username = :username',(username,)).fetchone()
         if yes_user:
+          conn.close()
           return helpers.error("Username already exists.", 400)
         
         hashed_password = generate_password_hash(password)
-        db.session.execute(text('INSERT INTO users (username, hash) VALUES (:username, :hash)'), {'username': username, 'hash': hashed_password})
+        cursor.execute('INSERT INTO users (username, hash) VALUES (?, ?)', (username, hashed_password))
+        conn.commit()
+
+        user_id = cursor.execute('SELECT id  FROM users WHERE username = :username', (username,)).fetchone()['id']
+        conn.close()
         
-        user_id = db.session.execute(text('SELECT id  FROM users WHERE username = :username'), {'username': username}).fetchone()[0]
-        session['user_id'] = yes_user['id']
+        session['user_id'] = user_id
         return redirect(url_for('index'))
     
     return render_template('register.html')
 
 
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)
