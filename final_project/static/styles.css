@@ -1,10 +1,36 @@
-body{
-    font-style: italic;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color:aliceblue;
-    padding: 0;
+.body {
+  background-image: url('background2.jpg');
+  background-size:cover;
+  background-repeat: no-repeat;
 }
-h1 {
-    color:black;
-    text-align: center;
+.header {
+  text-decoration-color: black;
+  text-align: center;
+  text-shadow: #555555;
 }
+
+.button {
+border: none;
+color: rgba(255, 255, 255, 0.582);
+padding: 16px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+transition-duration: 0.4s;
+cursor: pointer;
+}
+
+
+.button5 {
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+  }
+  
+  .button5:hover {
+    background-color: #555555;
+    color: white;
+  }
+  

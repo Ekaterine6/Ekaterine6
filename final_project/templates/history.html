@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+<!--got this table from w3schools.com-->
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+<head>
+    <style>
+      table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+      }
+
+      td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+      }
+
+      tr:nth-child(even) {
+          background-color: #dddddd;
+      }
+    </style>
+</head>
+<body>
+    <h2>Transaction history</h2>
+
+    <table>
+      <tr>
+        <th>Purchased</th>
+        <th>Date</th>
+        <th>Item</th>
+        <th>Time</th>
+        <th>Amount</th>
+      </tr>
+      {% for transaction in transactions %}
+      <tr>
+        <td>{{ transaction['purchased'] }}</td>
+        <td>{{ transaction['date'] }}</td>
+        <td>{{ transaction['item'] }}</td>
+        <td>{{ transaction['timestamp'] }}</td>
+        <td>{{ transaction['amount'] }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="3">No transaction found.</td>
+      </tr>
+      {% endfor %}
+    </table>
+    
+</body>
+{% endblock %}
+    

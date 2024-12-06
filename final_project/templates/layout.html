@@ -6,22 +6,33 @@
     <title>{% block title %}Project{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
-    <header>
-        <h1>Furni</h1>
+<body class="body">
+    <header class="header">
+        <h1>Furniture Butik</h1>
         <p>Explore timeless elegance in our Furniture Store.</p>
     </header>
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('login') }}">Login</a></li>
-            <li><a href="{{ url_for('register') }}">Register</a></li>
-        </ul>
-    </nav>
+<div>
+    {% if session["user_id"] %}
+        <div class="topnav">
+            <a href="{{ url_for('cart') }}"><button class="button button5">Cart</button></a>
+            <a href="{{ url_for('sell') }}"><button class="button button5">Sell</button></a>
+            <a href="{{ url_for('homepage') }}"><button class="button button5">Homepage</button></a>
+            <a href="{{ url_for('settings') }}"><button class="button button5">Settings</button></a>
+            <a href="{{ url_for('history') }}"><button class="button button5">History</button></a>
+            <a href="{{ url_for('logout') }}"><button class="button button5">Logout</button></a>
+        </div>
+    {% else %}
+        <div class="topnav">
+            <a href="{{ url_for('login') }}"><button class="button button5">Login</button></a>
+            <a href="{{ url_for('register') }}"><button class="button button5">Register</button></a>
+        </div>
+    {% endif %}
+</div>
     </header>
     <main>
         {% block content %}{% endblock %}
     </main>
+
     <footer>
         <p>Copyright &#169; Ekaterine Razmadze.</p>
     </footer>

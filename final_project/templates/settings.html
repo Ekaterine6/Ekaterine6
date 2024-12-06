@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}
+   settings
+{% endblock %}
+
+{% block content %}
+<h3>Settings</h3>
+<ul>
+    <li><a href="{{ url_for('change_password') }}"><button class="button button5">Change Password</button></a></li>
+</ul>
+{% endblock %}
