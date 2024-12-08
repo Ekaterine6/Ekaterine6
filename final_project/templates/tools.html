@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <!-- w3schools layout -->
+    <!--https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_clothing_store&stacked=h-->
+  <head>
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <div>
+      <div class="topnav">
+          <a href="{{ url_for('index') }}"><button class="button button5">Main</button></a>
+          <a href="{{ url_for('cart') }}"><button class="button button5">Cart</button></a>
+          <a href="{{ url_for('home') }}"><button class="button button5">Homepage</button></a>
+      </div>
+  </div>
+      <main>
+      <!-- w3schools layout -->
+      <!--https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_clothing_store&stacked=h-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+  .w3-sidebar a {font-family: "Roboto", sans-serif}
+  body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+  </style>
+  </head>
+  <body class="w3-content" style="max-width:1200px">
+
+  <!-- Top header -->
+  <header class="w3-container w3-xlarge">
+    <p class="w3-left">Floor panels</p>
+    <p class="w3-right">
+      <i class="fa fa-shopping-cart w3-margin-right"></i>
+      <i class="fa fa-search"></i>
+    </p>
+  </header>
+
+  <div class="w3-container w3-text-grey" id="tools">
+    <p>8 items</p>
+  </div>
+
+  <!-- Product grid -->
+  <div class="w3-row w3-grayscale">
+    <div class="w3-col l3 s6">
+      <div class="w3-display-container">
+        <img src="https://i.pinimg.com/736x/fb/68/4a/fb684a7155a1ded3eafb5a9ed330ad0f.jpg" style="width:100%">
+        <div class="w3-display-middle w3-display-hover">
+          <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+            Buy now <i class="fa fa-shopping-cart"></i> 
+          </button> 
+        </div>
+        <p>Cloud Sofa<br><b>$969.99</b></p>
+      </div>
+      <div class="w3-display-container">
+        <img src="https://i.pinimg.com/736x/68/e3/9d/68e39d5fec04dd9c24afe5561bd68b14.jpg" style="width:100%">
+        <div class="w3-display-middle w3-display-hover"> 
+          <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+            Buy now <i class="fa fa-shopping-cart"></i> 
+          </button> 
+        </div>
+        <p>Chick Sofa<br><b>$389.99</b></p>
+      </div>
+    </div>
+
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="https://i.pinimg.com/236x/bc/31/61/bc316195104a8ce588eb1fb7fa5e8bea.jpg" style="width:100%">
+          <span class="w3-tag w3-display-topleft">New</span>
+          <div class="w3-display-middle w3-display-hover"> 
+            <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+              Buy now <i class="fa fa-shopping-cart"></i> 
+            </button> 
+          </div>
+        </div>
+        <p>Elegant<br><b>$400.99</b></p>
+      </div>
+      <div class="w3-display-container">
+        <img src="https://i.pinimg.com/236x/a6/f4/ba/a6f4ba5cf9b1feeb2dd1e636962a6a16.jpg" style="width:100%">
+        <div class="w3-display-middle w3-display-hover"> 
+          <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+            Buy now <i class="fa fa-shopping-cart"></i> 
+          </button> 
+        </div>
+        <p>Comfy<br><b>$490.50</b></p>
+      </div>
+    </div>
+
+    <div class="w3-col l3 s6">
+      <div class="w3-display-container">
+        <img src="https://i.pinimg.com/236x/7c/e3/de/7ce3de51a6d059c2671baae7db8fbd4b.jpg" style="width:100%">
+        <div class="w3-display-middle w3-display-hover"> 
+          <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+            Buy now <i class="fa fa-shopping-cart"></i> 
+          </button> 
+        </div>
+        <p>Cozy<br><b>$890.50</b></p>
+      </div>
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="https://i.pinimg.com/236x/5b/f8/4c/5bf84c29692a7c170ea10ba8ca8995ff.jpg" style="width:100%">
+          <div class="w3-display-middle w3-display-hover"> 
+            <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+              Buy now <i class="fa fa-shopping-cart"></i> 
+            </button> 
+          </div>
+        </div>
+        <p>Stylish<br><b class="w3-text-red">$1000.99</b></p>
+      </div>
+    </div>
+
+    <div class="w3-col l3 s6">
+      <div class="w3-display-container">
+        <img src="https://i.pinimg.com/236x/4e/cc/88/4ecc88e9ec448a644bdb96759d7a1a48.jpg" style="width:100%">
+        <div class="w3-display-middle w3-display-hover"> 
+          <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+            Buy now <i class="fa fa-shopping-cart"></i> 
+          </button> 
+        </div>
+        <p>Unique<br><b>$540.99</b></p>
+      </div>
+      <div class="w3-display-container">
+        <img src="https://i.pinimg.com/236x/bd/df/fb/bddffbe0dd0090d642622bda627dfc82.jpg" style="width:100%">
+        <div class="w3-display-middle w3-display-hover"> 
+          <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+            Buy now <i class="fa fa-shopping-cart"></i> 
+          </button> 
+        </div>
+        <p>Classy<br><b>$876.99</b></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function addToCart(productName, productPrice) {
+    fetch('{{ url_for("adding_items_ajax") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            item: productName,
+            amount: productPrice
+        })
+    }).then(response => response.json())
+    .then(data => {
+          if (data.success) {
+            alert(productName + ' has been added to your cart.');
+        } else {
+            alert('Failed to add item to cart.');
+        }
+    });
+}
+  </script>
+        </main>
+        <footer>
+            <p>Copyright &#169; Ekaterine Razmadze.</p>
+        </footer>
+</body>
+</html>

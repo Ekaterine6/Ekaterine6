@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Project{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </head>
-<body class="body">
-    <header class="header">
+<body class="body_class">
+    <header class="headd">
         <h1>Furniture Butik</h1>
         <p>Explore timeless elegance in our Furniture Store.</p>
     </header>
@@ -15,8 +16,7 @@
     {% if session["user_id"] %}
         <div class="topnav">
             <a href="{{ url_for('cart') }}"><button class="button button5">Cart</button></a>
-            <a href="{{ url_for('sell') }}"><button class="button button5">Sell</button></a>
-            <a href="{{ url_for('homepage') }}"><button class="button button5">Homepage</button></a>
+            <a href="{{ url_for('home') }}"><button class="button button5">Homepage</button></a>
             <a href="{{ url_for('settings') }}"><button class="button button5">Settings</button></a>
             <a href="{{ url_for('history') }}"><button class="button button5">History</button></a>
             <a href="{{ url_for('logout') }}"><button class="button button5">Logout</button></a>

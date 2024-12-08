@@ -1,12 +1,11 @@
-.body {
+.body_class {
   background-image: url('background2.jpg');
   background-size:cover;
   background-repeat: no-repeat;
 }
-.header {
-  text-decoration-color: black;
+.headd {
+  text-decoration-color: rgb(213, 211, 211);
   text-align: center;
-  text-shadow: #555555;
 }
 
 .button {

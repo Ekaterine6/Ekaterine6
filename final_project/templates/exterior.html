@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<div>
+    <div class="topnav">
+        <a href="{{ url_for('index') }}"><button class="button button5">Main</button></a>
+        <a href="{{ url_for('cart') }}"><button class="button button5">Cart</button></a>
+        <a href="{{ url_for('home') }}"><button class="button button5">Homepage</button></a>
+    </div>
+</div>
+    <main>
+    <!-- w3schools layout -->
+    <!--https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_clothing_store&stacked=h-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.w3-sidebar a {font-family: "Roboto", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+</style>
+</head>
+<body class="w3-content" style="max-width:1200px">
+
+  <!-- Top header -->
+  <header class="w3-container w3-xlarge">
+    <p class="w3-left">Exterior wall design</p>
+    <p class="w3-right">
+      <i class="fa fa-shopping-cart w3-margin-right"></i>
+      <i class="fa fa-search"></i>
+    </p>
+  </header>
+
+  <!-- Image header -->
+  <div class="w3-display-container w3-container">
+    <img src="https://i.pinimg.com/736x/d9/ff/2f/d9ff2f2160f7ccd6f7c0be4d42c62363.jpg" alt="exterior" style="width:100%">
+    <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
+      <h1 class="w3-jumbo w3-hide-small">New arrivals</h1>
+      <h1 class="w3-hide-large w3-hide-medium">New arrivals</h1>
+      <h1 class="w3-hide-small">COLLECTION 2016</h1>
+      <p><a href="#exterior" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p>
+    </div>
+  </div>
+
+  <div class="w3-container w3-text-grey" id="exterior">
+    <p>8 items</p>
+  </div>
+
+  <!-- Product grid -->
+  <div class="w3-row w3-grayscale">
+    <div class="w3-col l3 s6">
+      <div class="w3-display-container">
+        <img src="https://i.pinimg.com/736x/2c/af/92/2caf9259044baf7dd92048caa212bcdb.jpg" style="width:100%">
+        <div class="w3-display-middle w3-display-hover"> 
+          <button class="w3-button w3-black" onclick="addToCart('exterior wall1', 970.99)"> 
+            Buy now <i class="fa fa-shopping-cart"></i> 
+          </button> 
+        </div>
+        <p>Elegant and timeless.<br><b>$970.99</b></p>
+      </div>
+      <div class="w3-display-container">
+        <img src="https://i.pinimg.com/736x/f1/bc/66/f1bc66cbdeef73a02cc78b9f69ebd18e.jpg" style="width:100%">
+        <div class="w3-display-middle w3-display-hover"> 
+          <button class="w3-button w3-black" onclick="addToCart('exterior wall2', 887.99)"> 
+            Buy now <i class="fa fa-shopping-cart"></i> 
+          </button> 
+        </div>
+        <p>Unique and bold.<br><b>$887.99</b></p>
+      </div>
+    </div>
+
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="https://i.pinimg.com/736x/23/6f/da/236fda808918376810e508145e63cd94.jpg" style="width:100%">
+          <div class="w3-display-middle w3-display-hover"> 
+            <button class="w3-button w3-black" onclick="addToCart('exterior wall3', 400.99)"> 
+              Buy now <i class="fa fa-shopping-cart"></i> 
+            </button> 
+          </div>
+        </div>
+        <p>Harmonious and balanced.<br><b>$400.99</b></p>
+      </div>
+      <div class="w3-display-container">
+        <img src="https://i.pinimg.com/736x/28/ab/22/28ab2287669ab6dee51a52fcd923d227.jpg" style="width:100%">
+        <div class="w3-display-middle w3-display-hover"> 
+          <button class="w3-button w3-black" onclick="addToCart('exterior wall4', 1190.50)"> 
+            Buy now <i class="fa fa-shopping-cart"></i> 
+          </button> 
+        </div>
+        <p>Welcoming and warn.<br><b>$1190.50</b></p>
+      </div>
+    </div>
+
+    <div class="w3-col l3 s6">
+      <div class="w3-display-container">
+        <img src="https://i.pinimg.com/736x/68/ab/81/68ab81e61a85508c4e4606cf2254d964.jpg" style="width:100%">
+        <div class="w3-display-middle w3-display-hover"> 
+          <button class="w3-button w3-black" onclick="addToCart('exterior wall5', 890.99)"> 
+            Buy now <i class="fa fa-shopping-cart"></i> 
+          </button> 
+        </div>
+        <p>Natural and serene.<br><b>$890.50</b></p>
+      </div>
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="https://i.pinimg.com/736x/2d/27/f6/2d27f690e3e1ba76a2f4aa6098d3bac4.jpg" style="width:100%">
+          <div class="w3-display-middle w3-display-hover"> 
+            <button class="w3-button w3-black" onclick="addToCart('exterior wall6', 1000.99)"> 
+              Buy now <i class="fa fa-shopping-cart"></i> 
+            </button> 
+          </div>
+        </div>
+        <p>Modern and sleek.<br><b class="w3-text-red">$1000.99</b></p>
+      </div>
+    </div>
+
+    <div class="w3-col l3 s6">
+      <div class="w3-display-container">
+        <img src="https://i.pinimg.com/736x/4a/b6/c2/4ab6c2174274f9ae67ab3da059f8369f.jpg" style="width:100%">
+        <div class="w3-display-middle w3-display-hover"> 
+          <button class="w3-button w3-black" onclick="addToCart('exterior wall7.', 540.99)"> 
+            Buy now <i class="fa fa-shopping-cart"></i> 
+          </button> 
+        </div>
+        <p>Creative.<br><b>$540.99</b></p>
+      </div>
+      <div class="w3-display-container">
+        <img src="https://i.pinimg.com/736x/37/96/51/379651b140702e8d619abd8f8f5f6090.jpg" style="width:100%">
+        <div class="w3-display-middle w3-display-hover"> 
+          <button class="w3-button w3-black" onclick="addToCart('exterior wall8.', 876.99)"> 
+            Buy now <i class="fa fa-shopping-cart"></i> 
+          </button> 
+        </div>
+        <p>Classy and artistic.<br><b>$876.99</b></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function addToCart(productName, productPrice) {
+    fetch('{{ url_for("adding_items_ajax") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            item: productName,
+            amount: productPrice
+        })
+    }).then(response => response.json())
+    .then(data => {
+          if (data.success) {
+            alert(productName + ' has been added to your cart.');
+        } else {
+            alert('Failed to add item to cart.');
+        }
+    });
+}
+  </script>
+
+        </main>
+        <footer>
+            <p>Copyright &#169; Ekaterine Razmadze.</p>
+        </footer>
+    </body>
+    </html>

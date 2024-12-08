@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, url_for, request, redirect, session
+from flask import Flask, render_template, flash, url_for, request, redirect, session, jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
 from final_project import helpers
 from functools import wraps
@@ -34,9 +34,37 @@ def login_required(f):
 def index():
     return render_template('index.html')
 
-@app.route('/homepage')
-def homepage():
-    return render_template('homepage.html')
+@app.route('/exterior')
+def exterior():
+    return render_template('exterior.html')
+
+@app.route('/furniture')
+def furniture():
+    return render_template('furniture.html')
+
+@app.route('/newin')
+def newin():
+    return render_template('newin.html')
+
+@app.route('/wallpapers')
+def wallpapers():
+    return render_template('wallpapers.html')
+
+@app.route('/outdoor')
+def outdoor():
+    return render_template('outdoor.html')
+
+@app.route('/tools')
+def tools():
+    return render_template('tools.html')
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
+#@app.route('/home')
+#def home():
+ #   return render_template('home.html')
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -114,15 +142,36 @@ def logout():
     
     return render_template('login.html')
 
+
+# used internet help to create a flask route for ajax request
+@app.route('/adding_items_ajax', methods=['POST'])
+@login_required
+def adding_items_ajax():
+    data = request.get_json()
+    product = data['item']
+    price = data['amount']
+    user_id = session["user_id"]
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('INSERT INTO transactions (user_id, item, amount, timestamp) VALUES(?, ?, ?, ?)', 
+                   (user_id, product, price, timestamp))
+    conn.commit()
+    conn.close()
+    return jsonify(success=True)
+
+
 @app.route('/cart') 
 @login_required
 def cart(): 
-    return render_template('cart.html')
+    user_id = session["user_id"]
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cart_items = cursor.execute('SELECT user_id, item, timestamp, amount FROM transactions WHERE id = ? AND purchased IS NULL', (user_id,)).fetchall()
+    conn.close()
+    return render_template('cart.html', cart_items=cart_items)
 
-@app.route('/sell') 
-@login_required
-def sell(): 
-    return render_template('sell.html')
 
 @app.route('/settings') 
 @login_required
@@ -194,7 +243,7 @@ def history():
     user_id = session['user_id']
     conn = get_db_connection() 
     cursor = conn.cursor()
-    user_id = cursor.execute("SELECT item, amount, purchased, timestamp, date FROM transactions WHERE user_id = ?", (user_id,))
+    cursor.execute("SELECT item, amount, purchased, timestamp, date FROM transactions WHERE user_id = ?", (user_id,))
     transactions_sql = cursor.fetchall()
     conn.close()
 
