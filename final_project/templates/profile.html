@@ -1,0 +1,95 @@
+<!--This template is from bootstrat-->
+<!--https://bbbootstrap.com/snippets/bootstrap-5-profile-card-animation-74461039-->
+{% extends "layout.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.card {
+    width: 480px;
+    height: 350px;
+    background-color: #aca489;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.image img {
+    transition: all 0.5s
+}
+
+.card:hover .image img {
+    transform: scale(1.5)
+}
+
+.btn {
+    height: 140px;
+    width: 140px;
+    border-radius: 50%
+}
+
+.name {
+    font-size: 26px;
+    font-weight: bold
+}
+
+.idd { 
+    font-size: 14px; 
+    font-weight: 600; 
+} 
+.idd1 { 
+    font-size: 19px; 
+}
+
+.btn1 {
+    height: 40px;
+    width: 150px;
+    border: none;
+    background-color: #000;
+    color: #aeaeae;
+    font-size: 19px
+}
+
+
+.join {
+    font-size: 18px;
+    color: #363535;
+    font-weight: bold
+}
+
+</style>
+</head>
+<body>
+    <div class="container mt-4 mb-4 p-3 d-flex justify-content-center"> 
+        <div class="card p-4"> 
+            <div class=" image d-flex flex-column justify-content-center align-items-center"> 
+                <button class="btn btn-secondary"> 
+                    <img src="{{ default_profile_picture }}" height="100" width="100" />
+                </button> 
+                <span class="name mt-3">{{ user[0] }}</span>  
+                <div class=" d-flex mt-2"> 
+                    <a href="{{ url_for('edit_profile') }}" class="button button5">Edit Profile</a> 
+                </div> 
+                <div class="text mt-3"> 
+                    <span>bio {{ user[1] }}</span> 
+                </div> 
+                <div class=" px-2 rounded mt-4 date "> 
+                    <span class="join">Joined {{ user[2] }}</span> 
+                </div> 
+            </div> 
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
+
+
+
+

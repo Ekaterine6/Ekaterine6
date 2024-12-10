@@ -15,7 +15,7 @@ def get_db_connection():
     connection.row_factory = sqlite3.Row
     return connection
 
-
+# i will need this to make sure the user is looged in before letting them see the homepage and actually use the website
 def login_required(f):
     """ Decorate routes to require login.
 
@@ -29,6 +29,8 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+
+# pages of my website
 
 @app.route('/')
 def index():
@@ -50,6 +52,10 @@ def newin():
 def wallpapers():
     return render_template('wallpapers.html')
 
+@app.route('/wordrobe')
+def wordrobe():
+    return render_template('wordrobe.html')
+
 @app.route('/outdoor')
 def outdoor():
     return render_template('outdoor.html')
@@ -62,10 +68,7 @@ def tools():
 def home():
     return render_template('home.html')
 
-#@app.route('/home')
-#def home():
- #   return render_template('home.html')
-
+# Logging the user in 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """logging the user in"""
@@ -92,24 +95,23 @@ def login():
  
     return render_template('login.html')
 
-
+# registering the user
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form.get("username")
-        print(f"Username: {username}")
         if not username:
             return helpers.error("provide username", 400)
         
         password = request.form.get("password")
-        print(f"Password: {password}")
         if not password:
             return helpers.error("provide password", 400)
         
         confirmation = request.form.get("confirmation")
-        print(f"Confirmation: {confirmation}")
         if not confirmation:
             return helpers.error("provide confirmation", 400)
+        
+        join_date = datetime.now().strftime('%Y-%m-%d') #--ai taught me what Converting a datetime object to a string is
         
         if password != confirmation:
             return helpers.error("password and confirmation dont match", 400)
@@ -122,7 +124,7 @@ def register():
           return helpers.error("Username already exists.", 400)
         
         hashed_password = generate_password_hash(password)
-        cursor.execute('INSERT INTO users (username, hash) VALUES (?, ?)', (username, hashed_password))
+        cursor.execute('INSERT INTO users (username, hash, join_date) VALUES (?, ?, ?)', (username, hashed_password, join_date))
         conn.commit()
 
         user_id = cursor.execute('SELECT id  FROM users WHERE username = :username', (username,)).fetchone()['id']
@@ -133,6 +135,7 @@ def register():
     
     return render_template('register.html')
 
+# logging the user out
 @app.route('/logout') 
 @login_required
 def logout(): 
@@ -143,7 +146,7 @@ def logout():
     return render_template('login.html')
 
 
-# used internet help to create a flask route for ajax request
+# used internet help to create a flask route for ajax request beacse i didn't know how
 @app.route('/adding_items_ajax', methods=['POST'])
 @login_required
 def adding_items_ajax():
@@ -151,42 +154,32 @@ def adding_items_ajax():
     product = data['item']
     price = data['amount']
     user_id = session["user_id"]
-    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
+    timestamp = datetime.now()
+    
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute('INSERT INTO transactions (user_id, item, amount, timestamp) VALUES(?, ?, ?, ?)', 
-                   (user_id, product, price, timestamp))
+            (user_id, product, price, timestamp))
     conn.commit()
     conn.close()
     return jsonify(success=True)
 
-
+# adding items to the cart
 @app.route('/cart') 
 @login_required
 def cart(): 
     user_id = session["user_id"]
     conn = get_db_connection()
     cursor = conn.cursor()
-    cart_items = cursor.execute('SELECT user_id, item, timestamp, amount FROM transactions WHERE id = ? AND purchased IS NULL', (user_id,)).fetchall()
+    cart_items = cursor.execute('SELECT item, amount FROM transactions WHERE user_id = ? AND purchased IS NULL', (user_id,)).fetchall()
     conn.close()
     return render_template('cart.html', cart_items=cart_items)
 
-
+# settings where the user can change their password
 @app.route('/settings') 
 @login_required
 def settings(): 
-    if request.method == "POST":
-        # handling settings form submission
-        # extract settings values from the form
-        # Save the new settings to the database
-        # db = get_db()
-        # db.execute("UPDATE settings SET value = ? WHERE key = ?", (new_setting_value, "setting_key")
-        # db.commit
-        flash("Settings updated successfully")
-        return redirect("/settings")
-    else:
-        return render_template('settings.html')
+    return render_template('settings.html')
     
 
 @app.route("/change_password", methods=["GET", "POST"])
@@ -235,7 +228,49 @@ def change_password():
         return redirect("settings")
     else:
         return render_template("change_password.html")
+    
 
+# profile where the user can customize their bio and see the date they logged in
+@app.route('/profile')
+@login_required
+def profile():
+    """user profile"""
+    user_id = session['user_id']
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT username, bio, join_date FROM users WHERE id = ?", (user_id,))
+    user = cursor.fetchone()
+    conn.close()
+
+    # i dont know how to let every user choose a picture for their profile so i set a default one
+    default_profile_picture = "https://i.pinimg.com/236x/98/be/a8/98bea856261a0d6923f67c09232acec3.jpg"
+    
+    return render_template('profile.html', user=user, default_profile_picture=default_profile_picture)
+
+
+@app.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    """edit profile"""
+    user_id = session['user_id']
+    if request.method == 'POST':
+        bio = request.form['bio']
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("UPDATE users SET bio = ? WHERE id = ?", (bio, user_id))
+        conn.commit()
+
+        flash('Profile updated successfully!', 'success')
+        return redirect(url_for('profile'))
+    conn = get_db_connection() 
+    cursor = conn.cursor() 
+    cursor.execute("SELECT username, bio, join_date FROM users WHERE id = ?", (user_id,)) 
+    user = cursor.fetchone() 
+    conn.close() 
+    return render_template('edit_profile.html', user=user)
+
+
+# here the user can see all the information about their purchased item , the price the date ...
 @app.route('/history') 
 @login_required
 def history(): 
@@ -243,7 +278,7 @@ def history():
     user_id = session['user_id']
     conn = get_db_connection() 
     cursor = conn.cursor()
-    cursor.execute("SELECT item, amount, purchased, timestamp, date FROM transactions WHERE user_id = ?", (user_id,))
+    cursor.execute("SELECT user_id, item, amount, timestamp FROM transactions WHERE user_id = ?", (user_id,))
     transactions_sql = cursor.fetchall()
     conn.close()
 

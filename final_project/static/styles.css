@@ -1,7 +1,9 @@
-.body_class {
-  background-image: url('background2.jpg');
-  background-size:cover;
+.background {
+  background-image: url('background.avif');
   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 .headd {
   text-decoration-color: rgb(213, 211, 211);

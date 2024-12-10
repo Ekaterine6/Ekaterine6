@@ -47,9 +47,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <div id="furniture" class="w3-bar-block w3-hide w3-padding-large w3-medium">
     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Sofas</a>
     <a href="{{ url_for('furniture') }}" class="w3-bar-item w3-button"><i class="fa fa-caret-right w3-margin-right"></i>Tables</a>
-    <a href="javascript:void(0)" class="w3-bar-item w3-button"><i class="fa fa-caret-right w3-margin-right"></i>Shelfs</a>
-    <a href="javascript:void(0)" class="w3-bar-item w3-button"><i class="fa fa-caret-right w3-margin-right"></i>antique</a>
-    <a href="javascript:void(0)" class="w3-bar-item w3-button"><i class="fa fa-caret-right w3-margin-right"></i>Wordrobe</a>
+    <a onclick="myAccFunc('wordrobe')" href="{{ url_for('wordrobe') }}" class="w3-bar-item w3-button"><i class="fa fa-caret-right w3-margin-right" id="wordrobe"></i>Wordrobe</a>
   </div>
 
   <a onclick="myAccFunc('exterior')" href="javascript:void(0)" class="w3-bar-item w3-button" id="myexterior">
@@ -65,23 +63,20 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     Tools<i class="fa fa-caret-down"></i></a>
   <div id="tools" class="w3-bar-block w3-hide w3-padding-large w3-medium">
       <a href="{{ url_for('tools') }}" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Floor Panels</a>
-      <a href="{{ url_for('wallpapers') }}" class="w3-bar-item w3-button"><i class="fa fa-caret-right w3-margin-right"></i>Wallpapers</a>
+      <a onclick="myAccFunc('wallpapers')" href="{{ url_for('wallpapers') }}" class="w3-bar-item w3-button"><i class="fa fa-caret-right w3-margin-right" id="wallpapers"></i>Wallpapers</a>
   </div>
  
   <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
     <a onclick="myAccFunc('outdoor')" href="javascript:void(0)" class="w3-bar-item w3-button" id="myOutdoor">
       Outdoor</a>
     <div id="outdoor" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-        <a href="{{ url_for('outdoor') }}" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Swings</a>
-        <a href="javascript:void(0)" class="w3-bar-item w3-button"><i class="fa fa-caret-right w3-margin-right"></i>Patio sets</a>
-        <a href="javascript:void(0)" class="w3-bar-item w3-button"><i class="fa fa-caret-right w3-margin-right"></i>Gardening</a>
+        <a href="{{ url_for('outdoor') }}" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Patio Sets</a>
     </div>
 
   <a onclick="myAccFunc('newin')" href="javascript:void(0)" class="w3-bar-item w3-button" id="myNewin">
     New In</a>
   <div id="newin" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-      <a href="{{ url_for('newin') }}" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Requested</a>
-      <a href="javascript:void(0)" class="w3-bar-item w3-button"><i class="fa fa-caret-right w3-margin-right"></i>Hot</a>
+      <a href="{{ url_for('newin') }}" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Hot</a>
   </div>
 
 </div>
@@ -127,7 +122,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
             <div class="w3-display-container"> 
             <img src="https://i.pinimg.com/736x/a2/c4/c9/a2c4c9e1c609eb403b2ebe9bdc20b57f.jpg" style="width:100%">
             <div class="w3-display-middle w3-display-hover"> 
-              <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+              <button class="w3-button w3-black" onclick="addToCart('Sofa10', 969.99)"> 
                 Buy now <i class="fa fa-shopping-cart"></i> 
               </button> 
             </div>
@@ -136,7 +131,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           <div class="w3-display-container"> 
             <img src="https://i.pinimg.com/474x/f0/ef/c7/f0efc7c5e77662cf0f4f658e69294a6d.jpg" style="width:100%"> 
             <div class="w3-display-middle w3-display-hover"> 
-              <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+              <button class="w3-button w3-black" onclick="addToCart('Sofa11', 389.99)"> 
                 Buy now <i class="fa fa-shopping-cart"></i> 
               </button> 
             </div>
@@ -149,7 +144,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
               <img src="https://i.pinimg.com/236x/ae/0b/fe/ae0bfebedeb1f2e09f08d918b3bb184d.jpg" style="width:100%"> 
               <span class="w3-tag w3-display-topleft">New</span> 
               <div class="w3-display-middle w3-display-hover"> 
-                <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+                <button class="w3-button w3-black" onclick="addToCart('Sofa12', 400.99)"> 
                   Buy now <i class="fa fa-shopping-cart"></i> 
                 </button> 
               </div>
@@ -159,7 +154,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <div class="w3-display-container"> 
         <img src="https://i.pinimg.com/236x/31/c8/b9/31c8b958bd5442fed1ba3d20e8f62ca3.jpg" style="width:100%"> 
         <div class="w3-display-middle w3-display-hover"> 
-          <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+          <button class="w3-button w3-black" onclick="addToCart('Sofa13', 490.50)"> 
             Buy now <i class="fa fa-shopping-cart"></i> 
           </button> 
         </div>
@@ -170,7 +165,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <div class="w3-display-container"> 
       <img src="https://i.pinimg.com/236x/35/b0/13/35b0132ef32b30a7aa50f85ba2c63936.jpg" style="width:100%"> 
       <div class="w3-display-middle w3-display-hover"> 
-        <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+        <button class="w3-button w3-black" onclick="addToCart('Sofa14', 890.50)"> 
           Buy now <i class="fa fa-shopping-cart"></i> 
         </button> 
       </div>
@@ -181,7 +176,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <img src="https://i.pinimg.com/236x/b6/52/a4/b652a4193a796ac77d09e68d91d07388.jpg" style="width:100%"> 
         <span class="w3-tag w3-display-topleft">Sale</span> 
         <div class="w3-display-middle w3-display-hover"> 
-          <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+          <button class="w3-button w3-black" onclick="addToCart('Sofa15', 1000.99)"> 
             Buy now <i class="fa fa-shopping-cart"></i> 
           </button> 
         </div>
@@ -193,7 +188,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <div class="w3-display-container"> 
     <img src="https://i.pinimg.com/474x/1e/1f/4e/1e1f4ef23bec7fdc1d4498ac1c65b0be.jpg" style="width:100%"> 
     <div class="w3-display-middle w3-display-hover"> 
-      <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+      <button class="w3-button w3-black" onclick="addToCart('Sofa16', 540.99)"> 
         Buy now <i class="fa fa-shopping-cart"></i> 
       </button> 
     </div>
@@ -202,7 +197,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <div class="w3-display-container"> 
     <img src="https://i.pinimg.com/236x/2b/64/c0/2b64c0b8ee171edcbe87be61e642309f.jpg" style="width:100%"> 
     <div class="w3-display-middle w3-display-hover"> 
-      <button class="w3-button w3-black" onclick="addToCart('cozy Sofa', 540.99)"> 
+      <button class="w3-button w3-black" onclick="addToCart('Sofa17', 876.99)"> 
         Buy now <i class="fa fa-shopping-cart"></i> 
       </button> 
     </div>
@@ -214,31 +209,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- Footer -->
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
     <div class="w3-row-padding">
-      <div class="w3-col s4">
-        <h4>Contact</h4>
-        <p>Questions? Go ahead.</p>
-        <form action="/action_page.php" target="_blank">
-          <p><input class="w3-input w3-border" type="text" placeholder="Name" name="Name" required></p>
-          <p><input class="w3-input w3-border" type="text" placeholder="Email" name="Email" required></p>
-          <p><input class="w3-input w3-border" type="text" placeholder="Subject" name="Subject" required></p>
-          <p><input class="w3-input w3-border" type="text" placeholder="Message" name="Message" required></p>
-          <button type="submit" class="w3-button w3-block w3-black">Send</button>
-        </form>
-      </div>
-
-      <div class="w3-col s4">
-        <h4>About</h4>
-        <p><a href="#">About us</a></p>
-        <p><a href="#">We're hiring</a></p>
-        <p><a href="#">Support</a></p>
-        <p><a href="#">Find store</a></p>
-        <p><a href="#">Shipment</a></p>
-        <p><a href="#">Payment</a></p>
-        <p><a href="#">Gift card</a></p>
-        <p><a href="#">Return</a></p>
-        <p><a href="#">Help</a></p>
-      </div>
-
+    
       <div class="w3-col s4 w3-justify">
         <h4>Store</h4>
         <p><i class="fa fa-fw fa-map-marker"></i> Furni</p>
@@ -292,18 +263,13 @@ function addToCart(productName, productPrice) {
     }).then(response => response.json())
     .then(data => {
           if (data.success) {
-            alert(productName + ' has been added to your cart.');
+            alert(productName + ' was purchased and added to your cart.');
         } else {
             alert('Failed to add item to cart.');
         }
     });
 }
 
-  function checkout() {
-      let cart = JSON.parse(localStorage.getItem('cart'));
-      alert('Proceeding to checkout...');
-      // Implement checkout functionality here
-  }
 
   // Display the cart when the page loads
   window.onload = displayCart;

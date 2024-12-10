@@ -38,18 +38,14 @@
 
 <table id="customers">
   <tr>
-    <th>User_id</th>
     <th>Item</th>
-    <th>Time</th>
     <th>Price</th>
   </tr>
 
 {% if cart_items %}
     {% for transaction in cart_items %}
     <tr>
-        <td>{{ transaction['user_id'] }}</td>
         <td>{{ transaction['item'] }}</td>
-        <td>{{ transaction['timestamp'] }}</td>
         <td>{{ transaction['amount'] }}</td>
     </tr>
     {% endfor %}
